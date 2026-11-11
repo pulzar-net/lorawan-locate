@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.9', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      # h3 4.5 needs 3.10+; on 3.9 the coverage tests skip themselves.
+      - run: pip install pytest -e ".[h3]"
+        if: matrix.python != '3.9'
+      - run: pip install pytest -e .
+        if: matrix.python == '3.9'
+      - run: python -m pytest -v
+      - run: python tests/test_accuracy.py

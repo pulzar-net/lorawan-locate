@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lorawan-locate"
+dynamic = ["version"]
+description = "Locate LoRaWAN devices from the gateways that heard them: TDOA on fine timestamps, RSSI multilateration, centroid. Reads ChirpStack rxInfo."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Joseph Telaak", email = "joseph@pulzr.net" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["lorawan", "chirpstack", "tdoa", "geolocation", "multilateration", "sx1303"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: System :: Networking",
+]
+
+[project.optional-dependencies]
+h3 = ["h3>=4,<5"]
+
+[project.scripts]
+lorawan-locate = "lorawan_locate.__main__:main"
+
+[project.urls]
+Source = "https://github.com/pulzar-net/lorawan-locate"
+
+[tool.setuptools.dynamic]
+version = { attr = "lorawan_locate.__version__" }
