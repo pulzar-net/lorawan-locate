@@ -29,4 +29,7 @@ Please don't post device or gateway identifiers or exact coordinates you aren't 
 
 ## Releases
 
-Add an entry to `CHANGELOG.md` and bump `__version__` in `src/lorawan_locate/__init__.py`.
+Bump `__version__` in `src/lorawan_locate/__init__.py`, then push an annotated tag
+whose message is the release notes (`git tag -a vX.Y.Z --cleanup=whitespace -F notes.md`).
+There is no changelog file: what changed is in the
+[GitHub releases](https://github.com/pulzar-net/lorawan-locate/releases).
